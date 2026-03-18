@@ -1,0 +1,73 @@
+/* 1. root 제한을 풀어서 화면을 넓게 쓰게 합니다 */
+#root {
+  width: 100%;
+  margin: 0;
+  padding: 0; /* 기존 padding: 10em; 때문에 여백이 너무 컸을 거예요 */
+  text-align: center;
+}
+
+/* 2. 카드 이미지 비율 */
+.card-image {
+  width: 100%;
+  height: 300px; /* hheight 오타 수정 및 높이 고정 */
+  object-fit: cover;
+  border-radius: 8px; /* 모서리 살짝 깎으면 더 예뻐요 */
+}
+
+/* 3. 카드크기 */
+.flex-shrink-0 {
+  flex-shrink: 0;
+  width: 200px; /* 2px에서 200px로 수정! */
+  margin-right: 20px; /* 카드 사이 간격 추가 */
+}
+
+/* 4. 슬라이더 위치 조절 */
+.movie-slider {
+  display: flex;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+
+}
+
+/* App.css */
+
+/* 1. 스크롤바 완전히 숨기기 */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+/* 2. 슬라이더 그림자 및 부드러운 스크롤 */
+.movie-slider {
+  scroll-snap-type: x proximity; /* 스크롤 시 카드가 자석처럼 착 붙게 함 */
+}
+
+.flex-shrink-0 {
+  scroll-snap-align: start;
+}
+
+.start {
+  opacity: 0;
+}
+.end {
+  opacity: 1;
+  transition: opacity 0.5s;
+}
+
+.nav-item {
+  padding: 8px 16px;
+  border-radius: 20px; 
+  color: #94a3b8; 
+  cursor: pointer;
+  
+  transition: all 0.3s ease; 
+}
+
+.nav-item:hover {
+  background-color: rgba(255, 255, 255, 0.1); 
+  color: #ffffff; 
+  transform: translateY(-2px); 
+}
