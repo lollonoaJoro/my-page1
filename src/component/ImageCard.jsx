@@ -1,7 +1,7 @@
 const ImageCard = ({ imageUrl, title, onButtonClick, rating }) => {
     return (
         <div className="card-container cursor-pointer" onClick={onButtonClick}>
- <img src={imageUrl} alt={title} className="w-full h-auto object-cover object-contain rounded-lg"/>
+ <img src={imageUrl} alt={title} className="w-full h-auto object-cover rounded-lg"/>
  <div className="flex flex-col gap-1">
   <h3 className="text-lg font-bold truncate">{title}</h3>
 
