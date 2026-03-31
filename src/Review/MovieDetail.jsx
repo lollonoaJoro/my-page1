@@ -12,7 +12,10 @@ export default function Review(){
   const API_KEY = import.meta.env.VITE_TMDB_API_KEY;
   const API_URL = `https://api.themoviedb.org/3/movie/${id}?api_key=${API_KEY}&language=ko-KR&page=1`;
 const [movie, setMovies] = useState(null)
-const [comments, setComments] = useState([])
+const [comments, setComments] = useState(() => {
+  const saved = localStorage.getItem(`comment-${id}`)
+  return saved ? JSON.parse(saved) : []
+})
 const [newComment, setNewComment] = useState("")
 
 // 댓글함수
@@ -22,6 +25,7 @@ const handleAddComment = () => {
   setNewComment("")
 }
   useEffect(() => {
+    localStorage.setItem(`comment-${id}`, JSON.stringify(comments))
     setTimeout(() => {
     }, 100);
     fetch(API_URL)
@@ -30,7 +34,7 @@ const handleAddComment = () => {
         setMovies(data)
       })
       .catch((err) => console.error("데이터 로드 실패!", err));
-  }, [id]);
+  }, [comments, id]);
 
     return(
         <div className="min-h-screen bg-[#0B1120] text-white">
@@ -53,7 +57,7 @@ const handleAddComment = () => {
 <input type="text" value={newComment} className="p-1 rounded-xl text-white border-2"
 placeholder="댓글을 입력하세요"
  onChange={(e) => setNewComment(e.target.value)}/>
-<button className="px-2" onClick={handleAddComment}>등록</button>
+<button className="px-2 border-2 rounded-xl p-1 bg-black" onClick={handleAddComment}>등록</button>
 
 {/* 댓글입력기능 */}
 <ul className="space-y-3 mt-6">
